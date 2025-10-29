@@ -26,6 +26,12 @@ public class HomeController {
 		 * (se puede ver en propiedades dentro de Camunda Modeler)	
 		 */
 		ProcessInstantiationBuilder instance = engine.getRuntimeService().createProcessInstanceByKey("first_bpmn_execute");
+		
+		String item = "Computer";
+		
+		//De esta forma podemos acceder a una variable en tiempo de ejecución desde bpmn
+		instance.setVariable("itemName", item);
+		
 		/*
 		 * Finalmente ejecutamos el proceso
 		 */
