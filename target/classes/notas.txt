@@ -1,3 +1,4 @@
+------------------------------------------------------------------------------------------------------------------------
 History Time To Live(TTL) in application.yaml
 With the recent version of Camunda Framework, it has now become mandatory to specify History Time To Live(TTL).
 
@@ -8,16 +9,17 @@ History Time To Live (TTL) defines how long this historic data shall remain in t
 We can specify TTL in application.yaml by adding following property:
 
 camunda:
-
   bpm:
-
     generic-properties:
-
       properties:
-
         historyTimeToLive: 5
 
 
 Here the value 5 specifies that it is going to keep the data until 5 days.
 
 If you don't specify this property, you might see errors while trying to run the application.
+------------------------------------------------------------------------------------------------------------------------
+Types of tasks in camunda:
+- When a process execution arrives at the Script Task, the corresponding script is executed.
+  Inline Script -> whenever the task is executed, the script written inside will be executed
+  External Resource -> the script is not inside the task, it's in a external file
