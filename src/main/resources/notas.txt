@@ -19,7 +19,15 @@ Here the value 5 specifies that it is going to keep the data until 5 days.
 
 If you don't specify this property, you might see errors while trying to run the application.
 ------------------------------------------------------------------------------------------------------------------------
-Types of tasks in camunda:
+SCRIPT TASK:
 - When a process execution arrives at the Script Task, the corresponding script is executed.
   Inline Script -> whenever the task is executed, the script written inside will be executed
   External Resource -> the script is not inside the task, it's in a external file
+------------------------------------------------------------------------------------------------------------------------
+SERVICE TASK:
+- Invokes or executes the business logic defined outside the bpmn.
+Types:
+	JavaClass ->
+	Delegate Expression ->
+	Expression ->
+	REST ->
