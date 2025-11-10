@@ -27,7 +27,7 @@ SCRIPT TASK:
 SERVICE TASK:
 - Invokes or executes the business logic defined outside the bpmn.
 Types:
-	JavaClass ->
-	Delegate Expression ->
+	JavaClass -> execute a java class (if you switch the package or make a refactor the bpmn process breaks)
+	Delegate Expression -> looks for the instance of that class so we need Spring to manage the creation of that instance
 	Expression ->
 	REST ->

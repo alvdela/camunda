@@ -5,7 +5,7 @@
       <bpmn:outgoing>Flow_16ed54q</bpmn:outgoing>
     </bpmn:startEvent>
     <bpmn:endEvent id="Event_05u9v91">
-      <bpmn:incoming>Flow_0i5dm9x</bpmn:incoming>
+      <bpmn:incoming>Flow_0jf5dlg</bpmn:incoming>
     </bpmn:endEvent>
     <bpmn:sequenceFlow id="Flow_16ed54q" sourceRef="StartEvent_1" targetRef="Activity_1cejkx6" />
     <bpmn:scriptTask id="Activity_1cejkx6" name="Initialize User Object" scriptFormat="JavaScript" camunda:resultVariable="userObj">
@@ -59,7 +59,6 @@ obj;</bpmn:script>
       <bpmn:outgoing>Flow_121cp7p</bpmn:outgoing>
     </bpmn:scriptTask>
     <bpmn:sequenceFlow id="Flow_121cp7p" sourceRef="Activity_0ur6rw6" targetRef="Activity_0026mj7" />
-    <bpmn:sequenceFlow id="Flow_0i5dm9x" sourceRef="Activity_0026mj7" targetRef="Event_05u9v91" />
     <bpmn:serviceTask id="Activity_0026mj7" name="Fetch Email Id" camunda:class="com.adelaroz.delegates.FetchEmailDelegate">
       <bpmn:extensionElements>
         <camunda:inputOutput>
@@ -77,7 +76,24 @@ print("userObj with email :: " + JSON.stringify(userObj));</camunda:script>
         </camunda:inputOutput>
       </bpmn:extensionElements>
       <bpmn:incoming>Flow_121cp7p</bpmn:incoming>
-      <bpmn:outgoing>Flow_0i5dm9x</bpmn:outgoing>
+      <bpmn:outgoing>Flow_0jj13zr</bpmn:outgoing>
+    </bpmn:serviceTask>
+    <bpmn:sequenceFlow id="Flow_0jj13zr" sourceRef="Activity_0026mj7" targetRef="Activity_1mcse0b" />
+    <bpmn:sequenceFlow id="Flow_0jf5dlg" sourceRef="Activity_1mcse0b" targetRef="Event_05u9v91" />
+    <bpmn:serviceTask id="Activity_1mcse0b" name="Fetch User Role" camunda:delegateExpression="${fetchUserRoleDelegate}">
+      <bpmn:extensionElements>
+        <camunda:inputOutput>
+          <camunda:outputParameter name="temp">
+            <camunda:script scriptFormat="JavaScript">print("userRoleFromDelegate :: " + userRoleFromDelegate);
+
+userObj.userRole = userRoleFromDelegate;
+
+print("userObj with role :: " + JSON.stringify(userObj));</camunda:script>
+          </camunda:outputParameter>
+        </camunda:inputOutput>
+      </bpmn:extensionElements>
+      <bpmn:incoming>Flow_0jj13zr</bpmn:incoming>
+      <bpmn:outgoing>Flow_0jf5dlg</bpmn:outgoing>
     </bpmn:serviceTask>
   </bpmn:process>
   <bpmndi:BPMNDiagram id="BPMNDiagram_1">
@@ -94,9 +110,13 @@ print("userObj with email :: " + JSON.stringify(userObj));</camunda:script>
         <di:waypoint x="520" y="117" />
         <di:waypoint x="570" y="117" />
       </bpmndi:BPMNEdge>
-      <bpmndi:BPMNEdge id="Flow_0i5dm9x_di" bpmnElement="Flow_0i5dm9x">
+      <bpmndi:BPMNEdge id="Flow_0jj13zr_di" bpmnElement="Flow_0jj13zr">
         <di:waypoint x="670" y="117" />
-        <di:waypoint x="722" y="117" />
+        <di:waypoint x="740" y="117" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0jf5dlg_di" bpmnElement="Flow_0jf5dlg">
+        <di:waypoint x="840" y="117" />
+        <di:waypoint x="902" y="117" />
       </bpmndi:BPMNEdge>
       <bpmndi:BPMNShape id="_BPMNShape_StartEvent_2" bpmnElement="StartEvent_1">
         <dc:Bounds x="179" y="99" width="36" height="36" />
@@ -107,11 +127,14 @@ print("userObj with email :: " + JSON.stringify(userObj));</camunda:script>
       <bpmndi:BPMNShape id="Activity_1cvy55v_di" bpmnElement="Activity_0ur6rw6">
         <dc:Bounds x="420" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
-      <bpmndi:BPMNShape id="Event_05u9v91_di" bpmnElement="Event_05u9v91">
-        <dc:Bounds x="722" y="99" width="36" height="36" />
-      </bpmndi:BPMNShape>
       <bpmndi:BPMNShape id="Activity_12377mw_di" bpmnElement="Activity_0026mj7">
         <dc:Bounds x="570" y="77" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_05u9v91_di" bpmnElement="Event_05u9v91">
+        <dc:Bounds x="902" y="99" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0ogvmnp_di" bpmnElement="Activity_1mcse0b">
+        <dc:Bounds x="740" y="77" width="100" height="80" />
       </bpmndi:BPMNShape>
     </bpmndi:BPMNPlane>
   </bpmndi:BPMNDiagram>
